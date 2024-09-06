@@ -1,22 +1,16 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    userName: {
+    fullName:{
+        type: String,
+        required: true
+    },
+    userName:{
         type: String,
         required: true,
         unique: true
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true,
-        minLength: 6
-    },
-    confirmPassword: {
+    password:{
         type: String,
         required: true,
         minLength: 6
@@ -24,12 +18,13 @@ const userSchema = new mongoose.Schema({
     gender:{
         type: String,
         required: true,
-        enum: ["male","female"]
+        enum:["male","female"]
     },
     profilePic:{
         type:String,
         default:""
     }
-},{timestamps: true});
+},{timestamps:true});
 
-module.exports = mongoose.model("User",userSchema);
+const User = mongoose.model("User",userSchema);
+export default User;

@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const dbConnect = () => {
+export const dbConnect = () => {
     const Database_Url = process.env.DATABASE_URL;
-
+    
     //Database url not fetched
     if(!Database_Url){
         console.log("Database not present");
@@ -23,4 +23,3 @@ const dbConnect = () => {
     })
 }
 
-module.exports = dbConnect;

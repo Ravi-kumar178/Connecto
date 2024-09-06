@@ -1,27 +1,31 @@
-const express = require("express");
+import dotenv from "dotenv";
+import express from "express";
+import {dbConnect} from "./Config/Database.js"
+import cookieParser from "cookie-parser";
+import authRoute from "./Routes/auth.routes.js"
+
+
 const app = express();
-const dotenv = require("dotenv");
-const cookie = require("cookie-parser");
-
-
-//body-parser
-app.use(express.json());
-app.use(cookie());
-//port
 dotenv.config();
-const PORT = process.env.PORT || 4000;
 
-const dbConnect = require("./Config/Database");
-dbConnect();
+const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, ()=>{
-    console.log(`App is running at ${PORT}`);
-})
+//middleware
+app.use(express.json());
+app.use(cookieParser());
 
 //routes
-const router = require("./Routes/routes");
-app.use("/api/v1/",router);
+app.use("/auth",authRoute);
+
+//db-connection
+dbConnect();
+
+//app listening
+app.listen(PORT,()=>{
+    console.log(`App is listening at ${PORT}`)
+});
 
 app.get("/",(req,res)=>{
     res.send("App is up and running");
 })
+
