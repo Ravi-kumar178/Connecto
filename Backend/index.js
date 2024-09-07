@@ -3,6 +3,8 @@ import express from "express";
 import {dbConnect} from "./Config/Database.js"
 import cookieParser from "cookie-parser";
 import authRoute from "./Routes/auth.routes.js"
+import messageRoute from "./Routes/message.route.js"
+import userRoutes from "./Routes/user.routes.js"
 
 
 const app = express();
@@ -16,6 +18,8 @@ app.use(cookieParser());
 
 //routes
 app.use("/auth",authRoute);
+app.use("/message",messageRoute);
+app.use("/users",userRoutes);
 
 //db-connection
 dbConnect();
