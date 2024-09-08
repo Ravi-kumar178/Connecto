@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import /* React, */ { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../Context/AuthContext';
 
 const UseSignup = () => {
    const [loading,setLoading] = useState(false);
    const navigate = useNavigate();
+   const {/* authUser, */setAuthUser}= useAuthContext();
 
    const signup = async({fullName,userName,password,confirmPassword,gender}) => {
         const success = handleInputError({fullName,userName,password,confirmPassword,gender});
@@ -22,11 +24,16 @@ const UseSignup = () => {
                 throw new Error(data.error);
             } */
             if(data.message === "User already existing"){
-              navigate("/");
+                toast(data.message, {
+                    icon: '👏',
+                  });
+              navigate("/login");
             }
-            toast.error(data.message);
+             toast.success("User registered");
             //localstorage
+             localStorage.setItem("chat-user",JSON.stringify(data))
             //context
+            setAuthUser(data);
         } 
         catch (error) {
             toast.error(error.message);

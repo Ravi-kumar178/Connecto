@@ -95,8 +95,10 @@ const Signup = () => {
                 </div>
 
                 <div className='w-[85%] mx-auto'>
-                    <button type='submit' className=' btn  btn-neutral btn-block btn-sm mt-2'>
-                        Signup
+                    <button disabled={loading} type='submit' className=' btn  btn-neutral btn-block btn-sm mt-2'>
+                        {
+                            loading?(<span className="loading loading-infinity loading-lg"></span>):"Signup"
+                        }
                     </button>
                 </div>
             </form>
