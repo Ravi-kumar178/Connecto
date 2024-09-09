@@ -9,9 +9,7 @@ const useGetConversations = () => {
     const getConversations = async()=>{
         setLoading(true);
         try {
-            const data = await fetch('http://localhost:4000/users',{
-                method:"get"
-            });
+            const data = await fetch('http://localhost:4000/users');
             const res = await data.json();
             console.log(res);
             setConversations(res);
@@ -20,7 +18,7 @@ const useGetConversations = () => {
             toast.error(error.message);
         }
         finally{
-            setLoading(true);
+            setLoading(false);
         }
     }
     getConversations();

@@ -11,7 +11,7 @@ export const getUserForSidepoints = async(req,res) => {
         }).select("-password");
 
         //return
-        return res.status(200).json({success:true,filteredUser});
+        return res.status(200).json(filteredUser);
     }
     catch (error) {
         console.log("Error in getting user for sidebars: ",error.message);

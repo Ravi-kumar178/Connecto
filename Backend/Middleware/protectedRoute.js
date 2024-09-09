@@ -10,7 +10,7 @@ export const protectedRoute = async(req,res,next) => {
 
         //if(!token)
         if(!token){
-            res.status(401).json({
+          return  res.status(401).json({
                 message:"Unauthorized - No token provided"
             })
         }
@@ -18,8 +18,8 @@ export const protectedRoute = async(req,res,next) => {
         //decode verify()
         const decoded = jwt.verify(token,process.env.JWT_SECRET);
         if(!decoded){
-            res.status(401).json({
-                message:"Unauthorized - No token provided"
+           return res.status(401).json({
+                message:"Unauthorized - No decoded mssg provided"
             })
         }
         //find user
@@ -40,7 +40,7 @@ export const protectedRoute = async(req,res,next) => {
     } 
     catch (error) {
         console.log("Error in protected route: ",error.message);
-         res.status(500).json({
+        return res.status(500).json({
              message:"Internal Server error"
          })
     }
