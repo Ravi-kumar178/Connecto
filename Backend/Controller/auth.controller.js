@@ -92,6 +92,7 @@ export const authLogin = async(req,res) => {
 
         //return res
       return  res.status(200).json({
+            success:true,
             _id:userExist._id,
             fullName:userExist.fullName,
             userName:userExist.userName,
